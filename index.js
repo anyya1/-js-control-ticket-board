@@ -31,3 +31,27 @@ function rendertickets (){
 
 }
 rendertickets();
+
+
+pbutton.addEventListener('click', () => {
+    const titlevalue = title.value.trim();
+    const roomvalue = room.value.trim();
+    const categoryvalue = categoryselect.value.trim();
+  
+    if (!titlevalue) {
+        message.textContent = 'Введите что случилось';
+        return;
+    }
+    if (!roomvalue) {
+        message.textContent = 'Введите где';
+        return;
+    }if (!categoryvalue) {
+        message.textContent = 'Введите категорию';
+        return;
+    }
+    message.textContent = ''
+
+    tickets.push({ title: titlevalue, room: roomvalue, category: categoryvalue, done: false });
+    rendertickets();
+
+  });
