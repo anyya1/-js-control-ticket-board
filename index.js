@@ -1,6 +1,6 @@
 const title = document.getElementById(`title`)
 const room = document.getElementById(`room`)
-const category = document.getElementById(`category`)
+const categoryselect = document.getElementById(`categoryselect`)
 const pbutton = document.getElementById(`pfzdrfbutton`)
 const ticketList = document.getElementById(`ticketList`)
 const message = document.getElementById('message')
@@ -9,5 +9,25 @@ const tickets = [
     {title:`Проектор не включается`, room:`203`, category:`Оборудование`, done: false},
     {title:`Не закрывается окно`, room:`105`, category:`Аудитория`, done: false},
     {title:`В коридоре не горит свет`, room: `Коридор, 2-й этаж`, category:`Другое`, done: true }
-]
+];
 
+function rendertickets (){
+    ticketList.innerHTML = '';
+
+    tickets.forEach((ticket) => {
+
+        const li = document.createElement('li') 
+        let statusText; 
+        if(ticket.done === true){
+            statusText=`выполена`
+        }else{
+            statusText =`не выполнена`
+        }
+
+        li.textContent = `${ticket.title} · ${ticket.room} · ${ticket.category} · ${statusText}`;
+        ticketList.append(li);
+        
+    });
+
+}
+rendertickets();
