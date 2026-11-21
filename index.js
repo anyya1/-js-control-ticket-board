@@ -14,18 +14,22 @@ const tickets = [
 function rendertickets (){
     ticketList.innerHTML = '';
 
-    tickets.forEach((ticket) => {
+    tickets.forEach((ticket, index) => {
 
         const li = document.createElement('li') 
         let statusText; 
         if(ticket.done === true){
-            statusText=`выполена`
+            statusText=`Выполена`
         }else{
-            statusText =`не выполнена`
+            statusText =`Открыта`
         }
 
         li.textContent = `${ticket.title} · ${ticket.room} · ${ticket.category} · ${statusText}`;
         ticketList.append(li);
+
+        if(ticket.done === true){
+            //создать кнопку выполнить
+        }
         
     });
 
@@ -54,4 +58,7 @@ pbutton.addEventListener('click', () => {
     tickets.push({ title: titlevalue, room: roomvalue, category: categoryvalue, done: false });
     rendertickets();
 
+    title.value = '';
+    room.value = '';
+    categoryselect.value = '';
   });
