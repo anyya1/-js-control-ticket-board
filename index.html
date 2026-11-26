@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Заявки корпуса</h1>
     
+    <div class="form-container">
     <label for="title">Что случилось</label>
 <input id="title" type="text">
 
@@ -24,15 +26,17 @@
     <option value="Другое">Другое</option>
 </select>
 
-
 <button id="pfzdrfbutton" type="button">Добавить заявку</button>
+</div>
 
+<div class="filter-container">
 <label for="onlyOpen">только открытые</label>
 <input type = "checkbox" id ="onlyOpen">
+</div>
 
-<ul id="ticketList"></ul>
 <p id="message"></p>
 
+<ul id="ticketList"></ul>
 
 </body>
 </html>

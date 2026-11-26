@@ -11,7 +11,6 @@ const tickets = [
     {title:`Не закрывается окно`, room:`105`, category:`Аудитория`, done: false},
     {title:`В коридоре не горит свет`, room: `Коридор, 2-й этаж`, category:`Другое`, done: true }
 ];
-
 function rendertickets (){
     ticketList.innerHTML = '';
      
@@ -33,33 +32,51 @@ function rendertickets (){
 
         const li = document.createElement('li') 
         let statusText; 
+        let statusClass;
 
         if(ticket.done === true){
-            statusText=`Выполена`
+            statusText=`Выполнена`
+            statusClass = 'status-done'
         }else{
             statusText =`Открыта`
+            statusClass = 'status-open'
         }
 
-        li.textContent = `${ticket.title} · ${ticket.room} · ${ticket.category} · ${statusText}`;
-       
+        const textSpan = document.createElement('span');
+        const statusSpan = document.createElement('span');
+        statusSpan.textContent = statusText;
+        statusSpan.className = statusClass;
+
+        textSpan.append(`${ticket.title} · ${ticket.room} · ${ticket.category} · `);
+        textSpan.append(statusSpan);
+        li.append(textSpan);
+
+
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'actions';
 
         if(ticket.done === false){
             const doneButton = document.createElement('button');
             doneButton.textContent = 'Выполнить';
+            doneButton.className = 'done-btn'; 
             doneButton.addEventListener('click', () => {
                 tickets[index].done = true; 
                 rendertickets(); 
             });
-            li.append(doneButton);
+           actionsDiv.append(doneButton);
         }
         
         const delButton = document.createElement('button');
         delButton.textContent = 'Удалить';
+        delButton.className = 'del-btn';
         delButton.addEventListener('click', () => {
             tickets.splice(index, 1); 
             rendertickets(); 
         });
-        li.append(delButton);
+        
+        actionsDiv.append(delButton);
+
+        li.append(actionsDiv);
 
         ticketList.append(li);
 
