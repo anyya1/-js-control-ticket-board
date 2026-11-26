@@ -5,6 +5,7 @@ const pbutton = document.getElementById(`pfzdrfbutton`)
 const ticketList = document.getElementById(`ticketList`)
 const message = document.getElementById('message')
 const onlyOpen = document.getElementById('onlyOpen')
+const onlyDone = document.getElementById('onlyDone')
 
 const tickets = [
     {title:`Проектор не включается`, room:`203`, category:`Оборудование`, done: false},
@@ -25,6 +26,9 @@ function rendertickets (){
 
     tickets.forEach((ticket, index) => {
         if (onlyOpen.checked && ticket.done === true) {
+            return; 
+        }
+        if (onlyDone.checked && ticket.done === false) {
             return; 
         }
 
@@ -73,7 +77,7 @@ function rendertickets (){
             tickets.splice(index, 1); 
             rendertickets(); 
         });
-        
+
         actionsDiv.append(delButton);
 
         li.append(actionsDiv);
@@ -83,16 +87,28 @@ function rendertickets (){
 
     });
 
-    if (count === 0) {
+   if (count === 0) {
         const li = document.createElement('li');
-        li.textContent = 'Открытых заявок нет';
+        li.textContent = 'Нет заявок по выбранному фильтру';
         ticketList.append(li);
     }
 
 }
 rendertickets();
 
-onlyOpen.addEventListener('change', rendertickets);
+onlyOpen.addEventListener('change', () => {
+    if (onlyOpen.checked) {
+        onlyDone.checked = false; 
+    }
+    rendertickets();
+});
+
+onlyDone.addEventListener('change', () => {
+    if (onlyDone.checked) {
+        onlyOpen.checked = false; 
+    }
+    rendertickets();
+});
 
 pbutton.addEventListener('click', () => {
     const titlevalue = title.value.trim();
