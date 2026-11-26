@@ -25,12 +25,29 @@ function rendertickets (){
         }
 
         li.textContent = `${ticket.title} · ${ticket.room} · ${ticket.category} · ${statusText}`;
-        ticketList.append(li);
+       
 
-        if(ticket.done === true){
-            //создать кнопку выполнить
+        if(ticket.done === false){
+            const doneButton = document.createElement('button');
+            doneButton.textContent = 'Выполнить';
+            doneButton.addEventListener('click', () => {
+                tickets[index].done = true; 
+                rendertickets(); 
+            });
+            li.append(doneButton);
         }
         
+        const delButton = document.createElement('button');
+        delButton.textContent = 'Удалить';
+        delButton.addEventListener('click', () => {
+            tickets.splice(index, 1); 
+            rendertickets(); 
+        });
+        li.append(delButton);
+
+        ticketList.append(li);
+
+
     });
 
 }
