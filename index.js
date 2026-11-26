@@ -6,6 +6,7 @@ const ticketList = document.getElementById(`ticketList`)
 const message = document.getElementById('message')
 const onlyOpen = document.getElementById('onlyOpen')
 const onlyDone = document.getElementById('onlyDone')
+const filterCategory = document.getElementById('filterCategory')
 
 const tickets = [
     {title:`Проектор не включается`, room:`203`, category:`Оборудование`, done: false},
@@ -30,6 +31,9 @@ function rendertickets (){
         }
         if (onlyDone.checked && ticket.done === false) {
             return; 
+        }
+        if (filterCategory.value !== '' && ticket.category !== filterCategory.value) {
+            return;
         }
 
         count++; 
@@ -89,12 +93,14 @@ function rendertickets (){
 
    if (count === 0) {
         const li = document.createElement('li');
-        li.textContent = 'Нет заявок по выбранному фильтру';
+        li.textContent = 'Нет заявок по выбранным фильтрам';
         ticketList.append(li);
     }
 
 }
 rendertickets();
+
+filterCategory.addEventListener('change', rendertickets);
 
 onlyOpen.addEventListener('change', () => {
     if (onlyOpen.checked) {

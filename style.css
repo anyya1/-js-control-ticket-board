@@ -142,3 +142,19 @@ li button.done-btn:hover {
     flex-shrink: 0;
     margin-left: 15px;
 }
+.filter-container select {
+    padding: 6px;
+    border: 1px solid #f48fb1;
+    border-radius: 6px;
+    background-color: #fffafa;
+    color: #5a4a4a;
+    font-family: Arial, sans-serif;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.filter-container select:focus {
+    outline: none;
+    border-color: #ec407a;
+    box-shadow: 0 0 5px rgba(236, 64, 122, 0.4);
+}
